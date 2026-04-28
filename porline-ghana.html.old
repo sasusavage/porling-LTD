@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Porlin Ghana Limited</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cream: #FBF4E9;
+    --terracotta: #C4622D;
+    --terracotta-light: #E07B44;
+    --gold: #D4A843;
+    --dark: #1C1712;
+    --mid: #4A3728;
+    --muted: #8C7B6B;
+    --white: #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(251, 244, 233, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(196,98,45,0.12);
+    animation: slideDown 0.7s ease both;
+  }
+
+  @keyframes slideDown { from { transform: translateY(-60px); opacity:0; } to { transform: translateY(0); opacity:1; } }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--terracotta);
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+  }
+  .nav-logo span { display: block; font-size: 0.65rem; font-family: 'DM Sans', sans-serif; font-weight: 300; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; }
+
+  nav ul { list-style: none; display: flex; gap: 2.5rem; }
+  nav ul a { text-decoration: none; color: var(--mid); font-size: 0.88rem; font-weight: 500; letter-spacing: 0.04em; transition: color 0.2s; }
+  nav ul a:hover { color: var(--terracotta); }
+
+  .nav-cta {
+    background: var(--terracotta); color: var(--white);
+    padding: 0.6rem 1.5rem; border-radius: 40px;
+    font-size: 0.85rem; font-weight: 500; text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { background: var(--terracotta-light); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 4rem 5rem 4rem;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+
+  @keyframes fadeUp { from { opacity:0; transform: translateY(40px); } to { opacity:1; transform: translateY(0); } }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(196,98,45,0.1); color: var(--terracotta);
+    padding: 0.35rem 1rem; border-radius: 40px;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 2rem; width: fit-content;
+  }
+  .hero-tag::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--terracotta); }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 700; line-height: 1.05;
+    color: var(--dark); margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--terracotta); }
+
+  .hero-desc {
+    font-size: 1.05rem; color: var(--muted); line-height: 1.75;
+    max-width: 460px; margin-bottom: 2.5rem;
+  }
+
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--terracotta); color: var(--white);
+    padding: 0.85rem 2rem; border-radius: 50px;
+    font-size: 0.95rem; font-weight: 500; text-decoration: none;
+    transition: all 0.25s; box-shadow: 0 4px 20px rgba(196,98,45,0.3);
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary:hover { background: var(--terracotta-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(196,98,45,0.4); }
+
+  .btn-secondary {
+    border: 1.5px solid rgba(196,98,45,0.4); color: var(--mid);
+    padding: 0.85rem 2rem; border-radius: 50px;
+    font-size: 0.95rem; font-weight: 500; text-decoration: none;
+    transition: all 0.25s;
+  }
+  .btn-secondary:hover { border-color: var(--terracotta); color: var(--terracotta); background: rgba(196,98,45,0.05); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem;
+    padding-top: 2.5rem; border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 700; color: var(--terracotta); line-height: 1;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.06em; margin-top: 0.25rem; }
+
+  .hero-right {
+    position: relative; overflow: hidden;
+    animation: fadeIn 1.1s 0.4s ease both;
+  }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #E07B44 0%, #C4622D 40%, #8B4020 100%);
+    z-index: 0;
+  }
+
+  .hero-pattern {
+    position: absolute; inset: 0; z-index: 1; opacity: 0.07;
+    background-image: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%);
+    background-size: 24px 24px;
+  }
+
+  .hero-image-area {
+    position: absolute; inset: 0; z-index: 2;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 3rem;
+  }
+
+  .hero-badge {
+    background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: white; border-radius: 16px; padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem; max-width: 280px;
+  }
+  .hero-badge .badge-title { font-size: 0.75rem; opacity:0.8; letter-spacing:0.08em; text-transform: uppercase; margin-bottom: 0.4rem; }
+  .hero-badge .badge-val { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; }
+
+  .hero-icon-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+    z-index: 3;
+  }
+
+  .hero-service-card {
+    background: rgba(255,255,255,0.1); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px; padding: 1.2rem;
+    color: white; text-align: center;
+    transition: background 0.2s;
+  }
+  .hero-service-card:hover { background: rgba(255,255,255,0.18); }
+  .hero-service-card .svc-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .hero-service-card .svc-name { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; }
+
+  /* SERVICES */
+  .services {
+    padding: 7rem 4rem;
+    background: var(--white);
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--terracotta); margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700; color: var(--dark); line-height: 1.15;
+    max-width: 500px; margin-bottom: 1rem;
+  }
+
+  .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; }
+  .section-sub { max-width: 340px; color: var(--muted); line-height: 1.7; font-size: 0.95rem; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+  .service-card {
+    border-radius: 20px; overflow: hidden;
+    position: relative; min-height: 380px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .service-card:hover { transform: translateY(-6px); }
+
+  .service-card .card-bg {
+    position: absolute; inset: 0; z-index: 0;
+    transition: transform 0.4s;
+  }
+  .service-card:hover .card-bg { transform: scale(1.04); }
+
+  .card-bg-1 { background: linear-gradient(160deg, #3D2B1F 0%, #6B3A22 100%); }
+  .card-bg-2 { background: linear-gradient(160deg, #1A2E1A 0%, #2D5016 100%); }
+  .card-bg-3 { background: linear-gradient(160deg, #1A1A2E 0%, #2D2050 100%); }
+
+  .card-pattern {
+    position: absolute; inset: 0; z-index: 1; opacity: 0.08;
+    background-image: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 40%);
+    background-size: 18px 18px;
+  }
+
+  .card-number {
+    position: absolute; top: 2rem; left: 2rem; z-index: 2;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem; font-weight: 700; opacity: 0.12; color: white; line-height: 1;
+  }
+
+  .card-icon {
+    position: absolute; top: 2rem; right: 2rem; z-index: 2;
+    font-size: 2.5rem;
+    background: rgba(255,255,255,0.1); border-radius: 12px; padding: 0.6rem;
+  }
+
+  .card-content { position: relative; z-index: 2; color: white; }
+  .card-content h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem; font-weight: 700; margin-bottom: 0.6rem;
+  }
+  .card-content p { font-size: 0.88rem; opacity: 0.8; line-height: 1.65; margin-bottom: 1.2rem; }
+  .card-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.7);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .card-link:hover { color: white; }
+  .card-link::after { content: '→'; transition: transform 0.2s; }
+  .card-link:hover::after { transform: translateX(4px); }
+
+  /* WHY US */
+  .why {
+    padding: 7rem 4rem;
+    background: var(--cream);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+
+  .why-visual {
+    position: relative; height: 500px;
+  }
+
+  .why-box {
+    position: absolute; border-radius: 20px; overflow: hidden;
+  }
+  .why-box-main {
+    width: 75%; height: 380px; bottom: 0; left: 0;
+    background: linear-gradient(150deg, var(--terracotta), #8B3A1A);
+  }
+  .why-box-accent {
+    width: 55%; height: 220px; top: 0; right: 0;
+    background: linear-gradient(150deg, #D4A843, #B8820F);
+  }
+
+  .why-box-inner {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem;
+    color: white;
+  }
+  .why-box-inner .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 700; line-height: 1;
+  }
+  .why-box-inner .label { font-size: 0.8rem; opacity: 0.8; letter-spacing: 0.06em; }
+
+  .why-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 1.2rem; }
+  .why-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.2rem 1.4rem; border-radius: 14px;
+    background: white; box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .why-item:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.09); transform: translateX(4px); }
+  .why-item-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(196,98,45,0.1); display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+  .why-item-text h4 { font-size: 0.95rem; font-weight: 500; color: var(--dark); margin-bottom: 0.2rem; }
+  .why-item-text p { font-size: 0.83rem; color: var(--muted); line-height: 1.55; }
+
+  /* BOOKING */
+  .booking {
+    padding: 7rem 4rem;
+    background: var(--dark);
+    position: relative; overflow: hidden;
+  }
+
+  .booking::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,98,45,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .booking-inner {
+    max-width: 700px; margin: 0 auto; position: relative; z-index: 1;
+    text-align: center;
+  }
+
+  .booking .section-label { color: var(--gold); }
+  .booking .section-title { color: white; margin: 0 auto 1rem; }
+  .booking-sub { color: rgba(255,255,255,0.55); margin-bottom: 3rem; font-size: 1rem; line-height: 1.7; }
+
+  .booking-form {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px; padding: 2.5rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; text-align: left; }
+  .form-group label { font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.55); letter-spacing: 0.06em; text-transform: uppercase; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px; padding: 0.85rem 1.1rem;
+    color: white; font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; outline: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+  .form-group select option { background: #2A1F18; }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--terracotta);
+    background: rgba(255,255,255,0.1);
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-full { grid-column: 1 / -1; }
+
+  .form-submit {
+    width: 100%; margin-top: 1.2rem;
+    background: var(--terracotta); color: white;
+    padding: 1rem; border: none; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500;
+    cursor: pointer; transition: all 0.25s;
+    box-shadow: 0 4px 20px rgba(196,98,45,0.4);
+  }
+  .form-submit:hover { background: var(--terracotta-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(196,98,45,0.5); }
+
+  /* FOOTER */
+  footer {
+    background: #130E09;
+    padding: 4rem 4rem 2rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .footer-brand .nav-logo { margin-bottom: 1rem; display: block; }
+  .footer-desc { font-size: 0.88rem; line-height: 1.7; max-width: 280px; }
+
+  .footer-col h4 { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 1.2rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-col ul li a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--terracotta-light); }
+
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 2rem; font-size: 0.82rem;
+  }
+  .footer-copy a { color: var(--terracotta-light); text-decoration: none; }
+
+  /* ANIMATIONS on scroll */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 300px; }
+    .hero-left { padding: 3rem 1.5rem; }
+    .services { padding: 4rem 1.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .why { grid-template-columns: 1fr; padding: 4rem 1.5rem; }
+    .why-visual { height: 300px; }
+    .booking { padding: 4rem 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    footer { padding: 3rem 1.5rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    Porlin Ghana
+    <span>Limited</span>
+  </div>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">About</a></li>
+    <li><a href="#booking">Contact</a></li>
+  </ul>
+  <a href="#booking" class="nav-cta">Book Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Ghana's Trusted Professionals</div>
+    <h1>Building Spaces,<br><em>Elevating</em><br>Standards.</h1>
+    <p class="hero-desc">From facility management to construction and interior design — Porlin Ghana Limited delivers excellence across every project, every time.</p>
+    <div class="hero-btns">
+      <a href="#booking" class="btn-primary">Book a Consultation</a>
+      <a href="#services" class="btn-secondary">Our Services</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div>
+        <div class="stat-num">200+</div>
+        <div class="stat-label">Projects Delivered</div>
+      </div>
+      <div>
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Client Satisfaction</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-pattern"></div>
+    <div class="hero-image-area">
+      <div class="hero-badge">
+        <div class="badge-title">Currently Active In</div>
+        <div class="badge-val">Accra, Ghana 🇬🇭</div>
+      </div>
+      <div class="hero-icon-grid">
+        <div class="hero-service-card">
+          <div class="svc-icon">🏢</div>
+          <div class="svc-name">Facility Management</div>
+        </div>
+        <div class="hero-service-card">
+          <div class="svc-icon">🏗️</div>
+          <div class="svc-name">Construction</div>
+        </div>
+        <div class="hero-service-card">
+          <div class="svc-icon">🛋️</div>
+          <div class="svc-name">Interior Design</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header reveal">
+    <div>
+      <span class="section-label">What We Offer</span>
+      <h2 class="section-title">Our Core Services</h2>
+    </div>
+    <p class="section-sub">We bring expertise, reliability, and creativity to every engagement — built for Ghanaian homes and businesses.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="card-bg card-bg-1"></div>
+      <div class="card-pattern"></div>
+      <div class="card-number">01</div>
+      <div class="card-icon">🏢</div>
+      <div class="card-content">
+        <h3>Facility Management</h3>
+        <p>Comprehensive management of your commercial and residential properties — maintenance, security coordination, cleaning, and more.</p>
+        <a href="#booking" class="card-link">Book a consultation</a>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="card-bg card-bg-2"></div>
+      <div class="card-pattern"></div>
+      <div class="card-number">02</div>
+      <div class="card-icon">🏗️</div>
+      <div class="card-content">
+        <h3>Construction</h3>
+        <p>From foundation to finishing, we execute residential and commercial construction projects with precision, quality materials, and on-time delivery.</p>
+        <a href="#booking" class="card-link">Book a consultation</a>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="card-bg card-bg-3"></div>
+      <div class="card-pattern"></div>
+      <div class="card-number">03</div>
+      <div class="card-icon">🛋️</div>
+      <div class="card-content">
+        <h3>Interior Design</h3>
+        <p>Transforming empty spaces into stunning environments that reflect your personality and elevate your everyday living and working experience.</p>
+        <a href="#booking" class="card-link">Book a consultation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="why-visual reveal">
+    <div class="why-box why-box-main">
+      <div class="why-box-inner" style="background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);">
+        <div class="num">200+</div>
+        <div class="label">Successful Projects</div>
+      </div>
+    </div>
+    <div class="why-box why-box-accent">
+      <div class="why-box-inner" style="background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);">
+        <div class="num">10+</div>
+        <div class="label">Years in Ghana</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <span class="section-label">Why Choose Us</span>
+    <h2 class="section-title">Your Vision, Our Commitment</h2>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.7; max-width: 420px; margin: 1rem 0 0.5rem;">We combine local knowledge with global standards to deliver outstanding results for every client.</p>
+    <ul class="why-list">
+      <li class="why-item">
+        <div class="why-item-icon">✅</div>
+        <div class="why-item-text">
+          <h4>Licensed & Certified</h4>
+          <p>All our professionals are certified and our company is fully registered and compliant in Ghana.</p>
+        </div>
+      </li>
+      <li class="why-item">
+        <div class="why-item-icon">⏱️</div>
+        <div class="why-item-text">
+          <h4>On-Time Delivery</h4>
+          <p>We respect your time and consistently deliver projects within the agreed schedule.</p>
+        </div>
+      </li>
+      <li class="why-item">
+        <div class="why-item-icon">💬</div>
+        <div class="why-item-text">
+          <h4>Clear Communication</h4>
+          <p>Regular updates and transparent communication so you're never left guessing.</p>
+        </div>
+      </li>
+      <li class="why-item">
+        <div class="why-item-icon">🏆</div>
+        <div class="why-item-text">
+          <h4>Quality Guaranteed</h4>
+          <p>We stand by our work with a satisfaction guarantee on every project we complete.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="booking-inner">
+    <span class="section-label reveal">Get In Touch</span>
+    <h2 class="section-title reveal">Book a Free Consultation</h2>
+    <p class="booking-sub reveal">Ready to start your project? Fill out the form and our team will reach out within 24 hours.</p>
+
+    <div class="booking-form reveal">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Your full name" />
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+233 XX XXX XXXX" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@email.com" />
+        </div>
+        <div class="form-group">
+          <label>Service Interested In</label>
+          <select>
+            <option value="" disabled selected>Select a service</option>
+            <option>Facility Management</option>
+            <option>Construction</option>
+            <option>Interior Design</option>
+            <option>Multiple Services</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group form-full">
+          <label>Project Details</label>
+          <textarea placeholder="Tell us about your project or what you need help with..."></textarea>
+        </div>
+      </div>
+      <button class="form-submit">Send Booking Request →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo">Porlin Ghana <span>Limited</span></div>
+      <p class="footer-desc">Ghana's trusted partner for facility management, construction, and interior design excellence.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Facility Management</a></li>
+        <li><a href="#services">Construction</a></li>
+        <li><a href="#services">Interior Design</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#why">About Us</a></li>
+        <li><a href="#booking">Book a Consultation</a></li>
+        <li><a href="#booking">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Porlin Ghana Limited. All rights reserved.</span>
+    <span>Accra, Ghana 🇬🇭</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit
+  document.querySelector('.form-submit').addEventListener('click', function () {
+    this.textContent = '✅ Request Sent! We\'ll be in touch soon.';
+    this.style.background = '#2D7A2D';
+    this.disabled = true;
+  });
+</script>
+</body>
+</html>
