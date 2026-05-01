@@ -62,25 +62,55 @@ document.addEventListener('DOMContentLoaded', () => {
             const submitBtn = bookingForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             
-            // Simulation of submission
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span class="loader"></span> Sending...';
             
-            setTimeout(() => {
+            fetch("https://formsubmit.co/ajax/porlinghana@gmail.com", {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    service: service,
+                    message: message,
+                    _subject: "New Booking Request from Porlin Ghana Website"
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
                 submitBtn.style.background = '#2D7A2D';
                 submitBtn.style.borderColor = '#2D7A2D';
                 submitBtn.innerHTML = '✅ Request Sent Successfully!';
                 
                 bookingForm.reset();
                 
-                // Reset button after 5 seconds
                 setTimeout(() => {
                     submitBtn.disabled = false;
                     submitBtn.style.background = '';
                     submitBtn.style.borderColor = '';
                     submitBtn.innerHTML = originalText;
                 }, 5000);
-            }, 1500);
+            })
+            .catch(error => {
+                submitBtn.style.background = '#dc3545';
+                submitBtn.style.borderColor = '#dc3545';
+                submitBtn.innerHTML = '❌ Error Sending Request';
+                
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.style.background = '';
+                    submitBtn.style.borderColor = '';
+                    submitBtn.innerHTML = originalText;
+                }, 5000);
+            });
         });
     }
 
